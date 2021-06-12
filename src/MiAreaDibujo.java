@@ -21,34 +21,27 @@ public class MiAreaDibujo extends JLabel {
 		return objetosGraficos.get(objetosGraficos.size() - 1);
 	}
 
-	public void deshacer() {
-
-		objetosGraficos.remove(objetosGraficos.size() - 1);
-
-		paint(this.getGraphics());
-	}
-
-	public void limpiar(Graphics g) {
-		objetosGraficos.clear();
-		paint(g);
-	}
-
 	public void paint(Graphics g) {
 
 		super.paint(g);
 
 		for (int i = 0; i < objetosGraficos.size(); i++) {
 			ObjetoGrafico objg = objetosGraficos.get(i);
-			if (objg instanceof ImagenGrafico) {
-				g.drawImage(((ImagenGrafico) objg).getImagen(), objg.getX(), objg.getY(), null);
-			} else if (objg instanceof RectaGrafico) {
+
+			if (objg instanceof CircunferenciaGrafico) {
 				Graphics2D g2 = (Graphics2D) g;
-				g2.setStroke(new BasicStroke(((RectaGrafico) objg).getGrosor()));
-				g2.setColor(((RectaGrafico) objg).getColor());
-				int w = ((RectaGrafico) objg).getX1() - objg.getX();
-				int h = ((RectaGrafico) objg).getY1() - objg.getY();
-				g2.drawLine(objg.getX(), objg.getY(), objg.getX() + w, objg.getY() + h);
+
+				CircunferenciaGrafico circunferencia = (CircunferenciaGrafico) objg;
+				g2.setStroke(new BasicStroke(circunferencia.getGrosor()));
+				g2.setColor(circunferencia.getColor());
+
+				int radioGrande = 200;
+
+				int radio = circunferencia.getRadio();
+				// g2.drawArc(500 + (radioGrande - radio) / 2, 500 + (radioGrande - radio) / 2,
+				// radio, radio, 0, 180);
 			}
+
 		}
 	}
 }
