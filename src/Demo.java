@@ -29,10 +29,19 @@ public class Demo {
 	}
 
 	public void dibujar() {
-		
-		for (int r = 400; r <= 1000; r++) {
-			Circunferencia circunf = new Circunferencia(90, 90, r, 1000, Color.red, 1);
+
+		int radius = 300;
+		int colors = 392;
+		int penwidth = 20 * 56 / colors;
+		float hue = 0;
+
+		for (int i = 0; i < colors; i++) {
+			Color c = Color.getHSBColor(hue, 1, 1);
+			System.out.println(Integer.toHexString(c.getRGB()));
+			Circunferencia circunf = new Circunferencia(400, 400, radius + 600, 300, c, 1);
 			miAreaDibujo.addCircunferencia(circunf);
+			radius -= penwidth - 1;
+			hue += 0.9 / colors;
 		}
 
 	}
